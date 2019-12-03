@@ -1,30 +1,59 @@
+플밍 영화표 예약
 #include <stdio.h>
-#define SIZE 10
+#include <stdlib.h>
+
 int main(void)
 {
-int seat_number, i;
-int seats[SIZE] = { 0 };
-while(1)
-{
-printf("-------------------------------\n");
-printf(" 1 2 3 4 5 6 7 8 9 10\n");
-printf("-------------------------------\n");
-for(i = 0; i < SIZE; i++)
-printf(" %d",seats[i]);
-printf("\n");
-printf("원하시는 좌석번호를 입력하세요(종료는 -1): ");
-scanf("%d", &seat_number);
-if(seat_number < 0 ) break;
-if(seat_number <= 0 || seat_number > SIZE) {
-printf("1부터 10사이의 숫자를 입력하세요\n");
-continue;
-}
-if(seats[seat_number-1] == 0) {// 예약되지 않았으면
-seats[seat_number-1] = 1;
-printf("예약되었습니다.\n\n");
-}
-else// 이미 예약되었으면
-printf("이미 예약된 자리입니다.\n\n");
-}
+	int seat[10] = { 0 };
+	int i, ss;
+	char yn;
+
+	while (1)            // 계속 돌리는거야
+	{
+		printf("좌석을 예약하시겠습니까 ? (y 또는 n)");
+		scanf_s(" %c", &yn);
+
+		if (yn == 'y')     
+		{
+			printf("-------------------------------\n");
+			printf(" 1 2 3 4 5 6 7 8 9 10\n");
+			printf("-------------------------------\n");
+
+			for (i = 0; i <= 9; i++)
+			{
+				printf("%d ", seat[i]);
+			}
+			printf("\n");
+			printf("원하는 좌석번호를 입력하세요(종료는 -1):");
+			scanf_s("%d", &ss);
+
+			if (ss < 0)             // 좌석번호 다시 입력해
+				break;
+			if (ss <= 0 || ss > 10) // 좌석번호 다시 입력해
+			{
+				printf("1부터 10사이의 숫자를 입력하세요\n");
+				continue;
+			}
+			if (seat[ss - 1] == 0)        // ss-1인 이유: 내가 2번 예약하고싶은데 0부터 5 6 7 8 9 에서 1번이 내가 입력한 2번인거
+			{                                //   0부터9까지니까 2번이면 2-1해줘서 1번 즉 0 1 2 3 4 5 6 7 8 9 에서 1번이 내가 입력한 2번인거
+				seat[ss - 1] = 1;
+				printf("예약 완료!\n");
+			}
+			
+			else
+				printf("ㅅㄱ요\n");
+			printf("-------------------------------\n");
+			printf(" 1 2 3 4 5 6 7 8 9 10\n");
+			printf("-------------------------------\n");
+
+				for (i = 0; i <= 9; i++)
+				{
+					printf("%d ", seat[i]);
+				}printf("\n\n");
+
+		}
+		else
+			printf("다시 입력해주세요\n");
+	}
 return 0;
 }
